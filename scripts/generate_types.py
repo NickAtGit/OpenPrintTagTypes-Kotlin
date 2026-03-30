@@ -6,7 +6,9 @@ Usage:
     python3 scripts/generate_types.py
 """
 
+import argparse
 import os
+import sys
 import yaml
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -211,8 +213,20 @@ def generate_write_protection():
     return "\n".join(lines) + "\n"
 
 
-def write_file(filename, content):
+def write_file(filename, content, check=False):
     path = os.path.join(OUT_DIR, filename)
+    if check:
+        try:
+            with open(path, encoding="utf-8") as f:
+                existing = f.read()
+            if existing != content:
+                print(f"  OUTDATED {filename}")
+                return False
+            print(f"  OK {filename}")
+            return True
+        except FileNotFoundError:
+            print(f"  MISSING {filename}")
+            return False
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
@@ -220,19 +234,39 @@ def write_file(filename, content):
 
 
 def main():
-    print(f"Generating Kotlin types from {SPEC_DIR}...")
+    parser = argparse.ArgumentParser(description="Generate Kotlin types from OpenPrintTag spec")
+    parser.add_argument("--check", action="store_true", help="Verify generated files are up to date (for CI)")
+    args = parser.parse_args()
 
-    write_file("MainFieldKey.kt", generate_field_key_enum("main", "main_fields.yaml", "MainFieldKey"))
-    write_file("AuxFieldKey.kt", generate_field_key_enum("auxiliary", "aux_fields.yaml", "AuxFieldKey"))
-    write_file("MetaFieldKey.kt", generate_field_key_enum("meta", "meta_fields.yaml", "MetaFieldKey"))
-    write_file("MaterialClass.kt", generate_material_class())
-    write_file("MaterialType.kt", generate_material_type())
-    write_file("MaterialPropertyTag.kt", generate_material_property_tag())
-    write_file("TagCategory.kt", generate_tag_category())
-    write_file("MaterialCertification.kt", generate_material_certification())
-    write_file("WriteProtection.kt", generate_write_protection())
+    action = "Checking" if args.check else "Generating"
+    print(f"{action} Kotlin types from {SPEC_DIR}...")
 
-    print("Done!")
+    files = [
+        ("MainFieldKey.kt", generate_field_key_enum("main", "main_fields.yaml", "MainFieldKey")),
+        ("AuxFieldKey.kt", generate_field_key_enum("auxiliary", "aux_fields.yaml", "AuxFieldKey")),
+        ("MetaFieldKey.kt", generate_field_key_enum("meta", "meta_fields.yaml", "MetaFieldKey")),
+        ("MaterialClass.kt", generate_material_class()),
+        ("MaterialType.kt", generate_material_type()),
+        ("MaterialPropertyTag.kt", generate_material_property_tag()),
+        ("TagCategory.kt", generate_tag_category()),
+        ("MaterialCertification.kt", generate_material_certification()),
+        ("WriteProtection.kt", generate_write_protection()),
+    ]
+
+    all_ok = True
+    for filename, content in files:
+        result = write_file(filename, content, check=args.check)
+        if args.check and result is False:
+            all_ok = False
+
+    if args.check:
+        if all_ok:
+            print("All files up to date.")
+        else:
+            print("Files are outdated. Run: python3 scripts/generate_types.py")
+            sys.exit(1)
+    else:
+        print("Done!")
 
 
 if __name__ == "__main__":
