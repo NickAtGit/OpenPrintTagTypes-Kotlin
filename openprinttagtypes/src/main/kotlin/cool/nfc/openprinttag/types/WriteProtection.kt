@@ -10,7 +10,7 @@ enum class WriteProtection(val value: Int) {
     PROTECT_PAGE_UNLOCKABLE(2);
 
     val isWritable: Boolean get() = this == NO
-    val isUnlockable: Boolean get() = this == REVERSIBLE
+    val isUnlockable: Boolean get() = this == PROTECT_PAGE_UNLOCKABLE
 
     companion object {
         fun fromValue(value: Int): WriteProtection? = entries.find { it.value == value }

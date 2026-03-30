@@ -204,7 +204,7 @@ def generate_write_protection():
 
     lines.append("")
     lines.append("    val isWritable: Boolean get() = this == NO")
-    lines.append("    val isUnlockable: Boolean get() = this == REVERSIBLE")
+    lines.append("    val isUnlockable: Boolean get() = this == PROTECT_PAGE_UNLOCKABLE")
     lines.append("")
     lines.append("    companion object {")
     lines.append("        fun fromValue(value: Int): WriteProtection? = entries.find { it.value == value }")
