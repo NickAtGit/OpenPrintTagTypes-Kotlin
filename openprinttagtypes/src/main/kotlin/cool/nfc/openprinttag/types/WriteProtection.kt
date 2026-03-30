@@ -1,15 +1,16 @@
-// Auto-generated from OpenPrintTag spec/data/write_protection_enum.yaml
+// Auto-generated from OpenPrintTag spec — do not edit manually
+// Regenerate: python3 scripts/generate_types.py
+
 package cool.nfc.openprinttag.types
 
-enum class WriteProtection(
-    val value: Int,
-    val displayName: String,
-    val isWritable: Boolean,
-    val isUnlockable: Boolean,
-) {
-    NO(0, "No", isWritable = true, isUnlockable = false),
-    IRREVERSIBLE(1, "Irreversible", isWritable = false, isUnlockable = false),
-    PROTECT_PAGE_UNLOCKABLE(2, "Protect page unlockable", isWritable = false, isUnlockable = true);
+/** Write protection levels for NFC tags */
+enum class WriteProtection(val value: Int) {
+    NO(0),
+    IRREVERSIBLE(1),
+    PROTECT_PAGE_UNLOCKABLE(2);
+
+    val isWritable: Boolean get() = this == NO
+    val isUnlockable: Boolean get() = this == REVERSIBLE
 
     companion object {
         fun fromValue(value: Int): WriteProtection? = entries.find { it.value == value }

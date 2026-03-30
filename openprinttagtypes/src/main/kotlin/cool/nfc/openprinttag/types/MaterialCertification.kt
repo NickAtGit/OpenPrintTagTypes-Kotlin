@@ -1,14 +1,16 @@
-// Auto-generated from OpenPrintTag spec/data/material_certifications_enum.yaml
+// Auto-generated from OpenPrintTag spec — do not edit manually
+// Regenerate: python3 scripts/generate_types.py
+
 package cool.nfc.openprinttag.types
 
+/** Certifications a material may have */
 enum class MaterialCertification(
     val value: Int,
-    val certName: String,
-    val displayName: String,
+    val displayName: String
 ) {
-    UL_2818(0, "ul_2818", "UL 2818"),
-    UL_94_V0(1, "ul_94_v0", "UL 94 V0"),
-    UL_2904(2, "ul_2904", "UL 2904");
+    UL_2818(0, "UL 2818"),
+    UL_94_V0(1, "UL 94 V0"),
+    UL_2904(2, "UL 2904");
 
     companion object {
         fun fromValue(value: Int): MaterialCertification? = entries.find { it.value == value }

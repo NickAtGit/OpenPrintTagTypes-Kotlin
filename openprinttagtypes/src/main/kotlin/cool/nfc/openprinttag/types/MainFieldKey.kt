@@ -1,12 +1,15 @@
-// Auto-generated from OpenPrintTag spec/data/main_fields.yaml
+// Auto-generated from OpenPrintTag spec — do not edit manually
+// Regenerate: python3 scripts/generate_types.py
+
 package cool.nfc.openprinttag.types
 
+/** Field keys for the main section of OpenPrintTag CBOR data */
 enum class MainFieldKey(
     val rawValue: Long,
     val fieldName: String,
-    val isRequired: Boolean,
-    val isRecommended: Boolean,
-    val isDeprecated: Boolean,
+    val isRequired: Boolean = false,
+    val isRecommended: Boolean = false,
+    val isDeprecated: Boolean = false
 ) {
     INSTANCE_UUID(0, "instance_uuid", isRequired = false, isRecommended = false, isDeprecated = false),
     PACKAGE_UUID(1, "package_uuid", isRequired = false, isRecommended = false, isDeprecated = false),
@@ -19,14 +22,18 @@ enum class MainFieldKey(
     MATERIAL_CLASS(8, "material_class", isRequired = true, isRecommended = false, isDeprecated = false),
     MATERIAL_TYPE(9, "material_type", isRequired = false, isRecommended = true, isDeprecated = false),
     MATERIAL_NAME(10, "material_name", isRequired = false, isRecommended = true, isDeprecated = false),
+    MATERIAL_ABBREVIATION(52, "material_abbreviation", isRequired = false, isRecommended = false, isDeprecated = false),
     BRAND_NAME(11, "brand_name", isRequired = false, isRecommended = true, isDeprecated = false),
     @Deprecated("Removed from spec")
     DEPRECATED_12(12, "deprecated_12", isRequired = false, isRecommended = false, isDeprecated = true),
     WRITE_PROTECTION(13, "write_protection", isRequired = false, isRecommended = false, isDeprecated = false),
     MANUFACTURED_DATE(14, "manufactured_date", isRequired = false, isRecommended = true, isDeprecated = false),
+    COUNTRY_OF_ORIGIN(55, "country_of_origin", isRequired = false, isRecommended = false, isDeprecated = false),
     EXPIRATION_DATE(15, "expiration_date", isRequired = false, isRecommended = false, isDeprecated = false),
     NOMINAL_NETTO_FULL_WEIGHT(16, "nominal_netto_full_weight", isRequired = false, isRecommended = true, isDeprecated = false),
     ACTUAL_NETTO_FULL_WEIGHT(17, "actual_netto_full_weight", isRequired = false, isRecommended = true, isDeprecated = false),
+    NOMINAL_FULL_LENGTH(53, "nominal_full_length", isRequired = false, isRecommended = true, isDeprecated = false),
+    ACTUAL_FULL_LENGTH(54, "actual_full_length", isRequired = false, isRecommended = true, isDeprecated = false),
     EMPTY_CONTAINER_WEIGHT(18, "empty_container_weight", isRequired = false, isRecommended = true, isDeprecated = false),
     PRIMARY_COLOR(19, "primary_color", isRequired = false, isRecommended = true, isDeprecated = false),
     SECONDARY_COLOR_0(20, "secondary_color_0", isRequired = false, isRecommended = false, isDeprecated = false),
@@ -40,6 +47,7 @@ enum class MainFieldKey(
     DEPRECATED_26(26, "deprecated_26", isRequired = false, isRecommended = false, isDeprecated = true),
     TRANSMISSION_DISTANCE(27, "transmission_distance", isRequired = false, isRecommended = false, isDeprecated = false),
     TAGS(28, "tags", isRequired = false, isRecommended = true, isDeprecated = false),
+    CERTIFICATIONS(56, "certifications", isRequired = false, isRecommended = false, isDeprecated = false),
     DENSITY(29, "density", isRequired = false, isRecommended = true, isDeprecated = false),
     FILAMENT_DIAMETER(30, "filament_diameter", isRequired = false, isRecommended = false, isDeprecated = false),
     SHORE_HARDNESS_A(31, "shore_hardness_a", isRequired = false, isRecommended = false, isDeprecated = false),
@@ -63,11 +71,6 @@ enum class MainFieldKey(
     VISCOSITY_60C(49, "viscosity_60c", isRequired = false, isRecommended = false, isDeprecated = false),
     CONTAINER_VOLUMETRIC_CAPACITY(50, "container_volumetric_capacity", isRequired = false, isRecommended = false, isDeprecated = false),
     CURE_WAVELENGTH(51, "cure_wavelength", isRequired = false, isRecommended = false, isDeprecated = false),
-    MATERIAL_ABBREVIATION(52, "material_abbreviation", isRequired = false, isRecommended = false, isDeprecated = false),
-    NOMINAL_FULL_LENGTH(53, "nominal_full_length", isRequired = false, isRecommended = true, isDeprecated = false),
-    ACTUAL_FULL_LENGTH(54, "actual_full_length", isRequired = false, isRecommended = true, isDeprecated = false),
-    COUNTRY_OF_ORIGIN(55, "country_of_origin", isRequired = false, isRecommended = false, isDeprecated = false),
-    CERTIFICATIONS(56, "certifications", isRequired = false, isRecommended = false, isDeprecated = false),
     DRYING_TEMPERATURE(57, "drying_temperature", isRequired = false, isRecommended = false, isDeprecated = false),
     DRYING_TIME(58, "drying_time", isRequired = false, isRecommended = false, isDeprecated = false);
 

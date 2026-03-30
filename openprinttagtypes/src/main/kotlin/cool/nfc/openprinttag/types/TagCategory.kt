@@ -1,19 +1,25 @@
-// Auto-generated from OpenPrintTag spec/data/tag_categories_enum.yaml
+// Auto-generated from OpenPrintTag spec — do not edit manually
+// Regenerate: python3 scripts/generate_types.py
+
 package cool.nfc.openprinttag.types
 
-enum class TagCategory(val value: String, val displayName: String, val emoji: String) {
-    BIOLOGICAL("biological", "Biological", "\uD83E\uDDEC"),
-    PHYSICAL("physical", "Physical", "\u2699\uFE0F"),
-    ELECTRICAL("electrical", "Electrical", "\u26A1"),
-    CHEMICAL("chemical", "Chemical", "\uD83E\uDDEA"),
-    VISUAL("visual", "Visual", "\uD83D\uDC41\uFE0F"),
-    ADDITIVES_ORGANIC("additives_organic", "Organic additives", "\uD83C\uDF3F"),
-    ADDITIVES_METAL("additives_metal", "Metal additives", "\uD83D\uDD29"),
-    ADDITIVES_OTHER("additives_other", "Other additives", "\u2728"),
-    IMITATION("imitation", "Imitation", "\uD83C\uDFAD"),
-    OTHER("other", "Other", "\uD83D\uDCE6");
+/** Categories for material property tags */
+enum class TagCategory(
+    val displayName: String,
+    val emoji: String
+) {
+    BIOLOGICAL("Biological", "🧬"),
+    PHYSICAL("Physical", "⚙️"),
+    ELECTRICAL("Electrical", "⚡"),
+    CHEMICAL("Chemical", "🧪"),
+    VISUAL("Visual", "👁️"),
+    ADDITIVES_ORGANIC("Organic additives", "🌿"),
+    ADDITIVES_METAL("Metal additives", "🔩"),
+    ADDITIVES_OTHER("Other additives", "✨"),
+    IMITATION("Imitation", "🎭"),
+    OTHER("Other", "📦");
 
     companion object {
-        fun fromValue(value: String): TagCategory? = entries.find { it.value == value }
+        fun fromName(name: String): TagCategory? = entries.find { it.name.equals(name, ignoreCase = true) }
     }
 }

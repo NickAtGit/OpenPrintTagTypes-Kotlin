@@ -1,9 +1,12 @@
-// Auto-generated from OpenPrintTag spec/data/material_class_enum.yaml
+// Auto-generated from OpenPrintTag spec — do not edit manually
+// Regenerate: python3 scripts/generate_types.py
+
 package cool.nfc.openprinttag.types
 
-enum class MaterialClass(val value: Int, val displayName: String) {
-    FFF(0, "Filament"),
-    SLA(1, "Resin");
+/** Material class (FFF or SLA) */
+enum class MaterialClass(val value: Int) {
+    FFF(0),
+    SLA(1);
 
     companion object {
         fun fromValue(value: Int): MaterialClass? = entries.find { it.value == value }
